@@ -1,0 +1,1108 @@
+-- Copyright (c) 2024. wmade(wmade@madelew.com)
+--
+-- Licensed under the Apache License, Version 2.0 (the "License"); you may not
+-- use this file except in compliance with the License. You may obtain a copy of
+-- the License at
+--
+-- http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+-- WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+-- License for the specific language governing permissions and limitations under
+-- the License.
+
+-- Cfx Built-in Types
+
+--- Represents a vehicle entity in the game.
+---@class vehicle : object
+
+--- The base class for all in-game entities like players, vehicles, objects.
+---@class entity : number
+
+--- Represents a map blip in the game.
+---@class blip : number
+
+--- Represents a pedestrian, which can be any NPC or player character in the game.
+---@class ped : object
+
+--- Represents a player, either the person playing the game or other players in multiplayer.
+---@class player : ped
+
+--- Represents an object in the game.
+---@class object : entity
+
+--- Represents a camera through which the player views the game.
+---@class camera : number
+
+--- A generic handle used in various CFX functions, typically represents a resource or an instance of something that requires management.
+---@class cfxhandle : number
+
+--- Represents a pickup item in the game that players can collect.
+---@class pickup : entity
+
+---
+--- ## **`CFX`**
+--- ### [Vector Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/vector2/)
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are. 
+--- This means that `type(vector2(1, 2))` will return `vector2`. 
+--- ##### More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+---@class vector2
+---@field x number To get the individual values from a vector2
+---@field y number To get the individual values from a vector2
+---@field xx vector2 Vectors support arbitrary swizzling
+---@field xy vector2 Vectors support arbitrary swizzling
+---@field yx vector2 Vectors support arbitrary swizzling
+---@field yy vector2 Vectors support arbitrary swizzling
+---@field xxx vector3 Vectors support arbitrary swizzling
+---@field xxy vector3 Vectors support arbitrary swizzling
+---@field xyx vector3 Vectors support arbitrary swizzling
+---@field xyy vector3 Vectors support arbitrary swizzling
+---@field yxx vector3 Vectors support arbitrary swizzling
+---@field yxy vector3 Vectors support arbitrary swizzling
+---@field yyx vector3 Vectors support arbitrary swizzling
+---@field yyy vector3 Vectors support arbitrary swizzling
+---@field xxxx vector4 Vectors support arbitrary swizzling
+---@field xxxy vector4 Vectors support arbitrary swizzling
+---@field xxyx vector4 Vectors support arbitrary swizzling
+---@field xxyy vector4 Vectors support arbitrary swizzling
+---@field xyxx vector4 Vectors support arbitrary swizzling
+---@field xyxy vector4 Vectors support arbitrary swizzling
+---@field xyyx vector4 Vectors support arbitrary swizzling
+---@field xyyy vector4 Vectors support arbitrary swizzling
+---@field yxxx vector4 Vectors support arbitrary swizzling
+---@field yxxy vector4 Vectors support arbitrary swizzling
+---@field yxyx vector4 Vectors support arbitrary swizzling
+---@field yxyy vector4 Vectors support arbitrary swizzling
+---@field yyxx vector4 Vectors support arbitrary swizzling
+---@field yyxy vector4 Vectors support arbitrary swizzling
+---@field yyyx vector4 Vectors support arbitrary swizzling
+---@field yyyy vector4 Vectors support arbitrary swizzling
+
+---
+--- ## **`CFX`**
+--- ### [Vector Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/vector2/)
+--- #### Creates a new vector2 value.
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are.
+--- This means that `type(vector2(1, 2))` will return `vector2`.
+--- ##### More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+--- ### **Syntax**
+--- ```lua
+--- vector2(x: number, y: number): vector2
+--- ```
+--- ### **Required Arguments**
+--- `x`: A floating point number representing the `x` value of your vector.
+--- `y`: A floating point number representing the `y` value of your vector.
+--- ### **Examples**
+--- Basic vector2 functionality:
+--- ```lua
+--- ;-- Basic vector with zero length:
+--- vector2(0, 0)
+---
+--- ;-- Vectors are a real data type:
+--- local v = vector2(1, 2)
+--- print(type(v)) -- prints `vector2`
+---
+--- ;-- Vectors support equality operators:
+--- local v1 = vector2(1, 2)
+--- local v2 = vector2(1, 2)
+--- local v3 = vector2(3, 4)
+--- print(v1 == v2) -- prints `true`
+--- print(v1 == v3) -- prints `false`
+--- print(v1 ~= v3) -- prints `true`
+---
+--- ;-- Arithmetic operations between vectors are supported:
+--- local v = vector2(1, 2)
+--- print(v + 2) -- prints `vector2(3, 4)`
+--- print(v - 2) -- prints `vector2(-1, 0)`
+--- print(v * 2) -- prints `vector2(1, 4)`
+--- print(v / 2) -- prints `vector2(0.5, 1)`
+---
+--- ;-- Or even with another vector:
+--- local v1 = vector2(1, 2)
+--- local v2 = vector2(3, 4)
+--- print(v1 + v2) -- prints `vector2(4, 6)`
+--- print(v1 - v2) -- prints `vector2(-2, -2)`
+--- print(v1 * v2) -- prints `vector2(3, 8)`
+--- print(v1 / v2) -- prints `vector2(0.33, 0.5)`
+---
+--- ;-- Vectors can be inverted:
+--- local v = vector2(1, 2)
+--- print(-v) -- prints `vector2(-1, -2)`
+---
+--- ;-- The length of the vector can be retrieved (pythagoras):
+--- local v = vector2(1, 2)
+--- print(#v) -- prints `2.236`
+---
+--- ;-- Vectors can be normalized:
+--- local v = vector2(1, 2)
+--- print(norm(v)) -- prints `vector2(0.45, 0.89)`
+---
+--- ;-- Unpacking works:
+--- local v = vector2(1, 2)
+--- local x, y = table.unpack(v)
+---
+--- ;-- To get the individual values from a vector:
+--- local v = vector2(1, 2)
+--- print(v.x) -- prints `1`
+--- print(v.y) -- prints `2`
+---
+--- ;-- Vectors support arbitrary swizzling:
+--- local v = vector2(1, 2)
+--- print(v.yx)   -- prints `vector2(2, 1)`
+--- print(v.xyx)  -- prints `vector3(1, 2, 1)`
+--- print(v.yxyx) -- prints `vector4(2, 1, 2, 1)`
+--- ```
+---@param x number A floating point number representing the `x` value of your vector.
+---@param y number A floating point number representing the `y` value of your vector.
+---@return vector2
+function vector2(x, y) end
+vec2 = vector2
+
+---
+--- ## **`CFX`**
+--- ### [Vector Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/vector3/)
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are. 
+--- This means that `type(vector3(1, 2, 3))` will return `vector3`. 
+--- ##### More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+---@class vector3
+---@field x number To get the individual values from a vector3
+---@field y number To get the individual values from a vector3
+---@field z number To get the individual values from a vector3
+---@field xx vector2 Vectors support arbitrary swizzling
+---@field xy vector2 Vectors support arbitrary swizzling
+---@field xz vector2 Vectors support arbitrary swizzling
+---@field yx vector2 Vectors support arbitrary swizzling
+---@field yy vector2 Vectors support arbitrary swizzling
+---@field yz vector2 Vectors support arbitrary swizzling
+---@field zx vector2 Vectors support arbitrary swizzling
+---@field zy vector2 Vectors support arbitrary swizzling
+---@field zz vector2 Vectors support arbitrary swizzling
+---@field xxx vector3 Vectors support arbitrary swizzling
+---@field xxy vector3 Vectors support arbitrary swizzling
+---@field xxz vector3 Vectors support arbitrary swizzling
+---@field xyx vector3 Vectors support arbitrary swizzling
+---@field xyy vector3 Vectors support arbitrary swizzling
+---@field xyz vector3 Vectors support arbitrary swizzling
+---@field xzx vector3 Vectors support arbitrary swizzling
+---@field xzy vector3 Vectors support arbitrary swizzling
+---@field xzz vector3 Vectors support arbitrary swizzling
+---@field yxx vector3 Vectors support arbitrary swizzling
+---@field yxy vector3 Vectors support arbitrary swizzling
+---@field yxz vector3 Vectors support arbitrary swizzling
+---@field yyx vector3 Vectors support arbitrary swizzling
+---@field yyy vector3 Vectors support arbitrary swizzling
+---@field yyz vector3 Vectors support arbitrary swizzling
+---@field yzx vector3 Vectors support arbitrary swizzling
+---@field yzy vector3 Vectors support arbitrary swizzling
+---@field yzz vector3 Vectors support arbitrary swizzling
+---@field zxx vector3 Vectors support arbitrary swizzling
+---@field zxy vector3 Vectors support arbitrary swizzling
+---@field zxz vector3 Vectors support arbitrary swizzling
+---@field zyx vector3 Vectors support arbitrary swizzling
+---@field zyy vector3 Vectors support arbitrary swizzling
+---@field zyz vector3 Vectors support arbitrary swizzling
+---@field zzx vector3 Vectors support arbitrary swizzling
+---@field zzy vector3 Vectors support arbitrary swizzling
+---@field zzz vector3 Vectors support arbitrary swizzling
+---@field xxxx vector4 Vectors support arbitrary swizzling
+---@field xxxy vector4 Vectors support arbitrary swizzling
+---@field xxxz vector4 Vectors support arbitrary swizzling
+---@field xxyx vector4 Vectors support arbitrary swizzling
+---@field xxyy vector4 Vectors support arbitrary swizzling
+---@field xxyz vector4 Vectors support arbitrary swizzling
+---@field xxzx vector4 Vectors support arbitrary swizzling
+---@field xxzy vector4 Vectors support arbitrary swizzling
+---@field xxzz vector4 Vectors support arbitrary swizzling
+---@field xyxx vector4 Vectors support arbitrary swizzling
+---@field xyxy vector4 Vectors support arbitrary swizzling
+---@field xyxz vector4 Vectors support arbitrary swizzling
+---@field xyyx vector4 Vectors support arbitrary swizzling
+---@field xyyy vector4 Vectors support arbitrary swizzling
+---@field xyyz vector4 Vectors support arbitrary swizzling
+---@field xyzx vector4 Vectors support arbitrary swizzling
+---@field xyzy vector4 Vectors support arbitrary swizzling
+---@field xyzz vector4 Vectors support arbitrary swizzling
+---@field xzxx vector4 Vectors support arbitrary swizzling
+---@field xzxy vector4 Vectors support arbitrary swizzling
+---@field xzxz vector4 Vectors support arbitrary swizzling
+---@field xzyx vector4 Vectors support arbitrary swizzling
+---@field xzyy vector4 Vectors support arbitrary swizzling
+---@field xzyz vector4 Vectors support arbitrary swizzling
+---@field xzzx vector4 Vectors support arbitrary swizzling
+---@field xzzy vector4 Vectors support arbitrary swizzling
+---@field xzzz vector4 Vectors support arbitrary swizzling
+---@field yxxx vector4 Vectors support arbitrary swizzling
+---@field yxxy vector4 Vectors support arbitrary swizzling
+---@field yxxz vector4 Vectors support arbitrary swizzling
+---@field yxyx vector4 Vectors support arbitrary swizzling
+---@field yxyy vector4 Vectors support arbitrary swizzling
+---@field yxyz vector4 Vectors support arbitrary swizzling
+---@field yxzx vector4 Vectors support arbitrary swizzling
+---@field yxzy vector4 Vectors support arbitrary swizzling
+---@field yxzz vector4 Vectors support arbitrary swizzling
+---@field yyxx vector4 Vectors support arbitrary swizzling
+---@field yyxy vector4 Vectors support arbitrary swizzling
+---@field yyxz vector4 Vectors support arbitrary swizzling
+---@field yyyx vector4 Vectors support arbitrary swizzling
+---@field yyyy vector4 Vectors support arbitrary swizzling
+---@field yyyz vector4 Vectors support arbitrary swizzling
+---@field yyzx vector4 Vectors support arbitrary swizzling
+---@field yyzy vector4 Vectors support arbitrary swizzling
+---@field yyzz vector4 Vectors support arbitrary swizzling
+---@field yzxx vector4 Vectors support arbitrary swizzling
+---@field yzxy vector4 Vectors support arbitrary swizzling
+---@field yzxz vector4 Vectors support arbitrary swizzling
+---@field yzyx vector4 Vectors support arbitrary swizzling
+---@field yzyy vector4 Vectors support arbitrary swizzling
+---@field yzyz vector4 Vectors support arbitrary swizzling
+---@field yzzx vector4 Vectors support arbitrary swizzling
+---@field yzzy vector4 Vectors support arbitrary swizzling
+---@field yzzz vector4 Vectors support arbitrary swizzling
+---@field zxxx vector4 Vectors support arbitrary swizzling
+---@field zxxy vector4 Vectors support arbitrary swizzling
+---@field zxxz vector4 Vectors support arbitrary swizzling
+---@field zxyx vector4 Vectors support arbitrary swizzling
+---@field zxyy vector4 Vectors support arbitrary swizzling
+---@field zxyz vector4 Vectors support arbitrary swizzling
+---@field zxzx vector4 Vectors support arbitrary swizzling
+---@field zxzy vector4 Vectors support arbitrary swizzling
+---@field zxzz vector4 Vectors support arbitrary swizzling
+---@field zyxx vector4 Vectors support arbitrary swizzling
+---@field zyxy vector4 Vectors support arbitrary swizzling
+---@field zyxz vector4 Vectors support arbitrary swizzling
+---@field zyyx vector4 Vectors support arbitrary swizzling
+---@field zyyy vector4 Vectors support arbitrary swizzling
+---@field zyyz vector4 Vectors support arbitrary swizzling
+---@field zyzx vector4 Vectors support arbitrary swizzling
+---@field zyzy vector4 Vectors support arbitrary swizzling
+---@field zyzz vector4 Vectors support arbitrary swizzling
+---@field zzxx vector4 Vectors support arbitrary swizzling
+---@field zzxy vector4 Vectors support arbitrary swizzling
+---@field zzxz vector4 Vectors support arbitrary swizzling
+---@field zzyx vector4 Vectors support arbitrary swizzling
+---@field zzyy vector4 Vectors support arbitrary swizzling
+---@field zzyz vector4 Vectors support arbitrary swizzling
+---@field zzzx vector4 Vectors support arbitrary swizzling
+---@field zzzy vector4 Vectors support arbitrary swizzling
+---@field zzzz vector4 Vectors support arbitrary swizzling
+
+---
+--- ## **`CFX`**
+--- ### [Vector Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/vector3/)
+--- #### Creates a new vector3 value.
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are.
+--- This means that `type(vector3(1, 2, 3))` will return `vector3`.
+--- ##### More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+--- ### **Syntax**
+--- ```lua
+--- vector3(x: number, y: number, z: number): vector3
+--- ```
+--- ### **Required Arguments**
+--- `x`: A floating point number representing the `x` value of your vector.
+--- `y`: A floating point number representing the `y` value of your vector.
+--- `z`: A floating point number representing the `z` value of your vector.
+--- ### **Examples**
+--- Basic vector3 functionality:
+--- ```lua
+--- ;-- Basic vector with zero length:
+--- vector3(0, 0, 0)
+---
+--- ;-- Vectors are a real data type:
+--- local v = vector3(1, 2, 3)
+--- print(type(v)) -- prints `vector3`
+---
+--- ;-- Vectors support equality operators:
+--- local v1 = vector3(1, 2, 3)
+--- local v2 = vector3(1, 2, 3)
+--- local v3 = vector3(4, 5, 6)
+--- print(v1 == v2) -- prints `true`
+--- print(v1 == v3) -- prints `false`
+--- print(v1 ~= v3) -- prints `true`
+---
+--- ;-- Arithmetic operations between vectors are supported:
+--- local v = vector3(1, 2, 3)
+--- print(v + 2) -- prints `vector3(3, 4, 5)`
+--- print(v - 2) -- prints `vector3(-1, 0, 1)`
+--- print(v * 2) -- prints `vector3(1, 4, 6)`
+--- print(v / 2) -- prints `vector3(0.5, 1, 1.5)`
+---
+--- ;-- Or even with another vector:
+--- local v1 = vector3(1, 2, 3)
+--- local v2 = vector3(4, 5, 6)
+--- print(v1 + v2) -- prints `vector3(5, 7, 9)`
+--- print(v1 - v2) -- prints `vector3(-3, -3, -3)`
+--- print(v1 * v2) -- prints `vector3(4, 10, 18)`
+--- print(v1 / v2) -- prints `vector3(0.25, 0.4, 0.5)`
+---
+--- ;-- Vectors can be inverted:
+--- local v = vector3(1, 2, 3)
+--- print(-v) -- prints `vector3(-1, -2, -3)`
+---
+--- ;-- The length of the vector can be retrieved (pythagoras):
+--- local v = vector3(1, 2, 3)
+--- print(#v) -- prints `3.742`
+---
+--- ;-- Vectors can be normalized:
+--- local v = vector3(1, 2, 3)
+--- print(norm(v)) -- prints `vector3(0.27, 0.53, 0.80)`
+---
+--- ;-- Unpacking works:
+--- local v = vector3(1, 2, 3)
+--- local x, y, z = table.unpack(v)
+---
+--- ;-- To get the individual values from a vector:
+--- local v = vector3(1, 2, 3)
+--- print(v.x) -- prints `1`
+--- print(v.y) -- prints `2`
+--- print(v.z) -- prints `3`
+---
+--- ;-- Vectors support arbitrary swizzling:
+--- local v = vector3(1, 2, 3)
+--- print(v.yx)   -- prints `vector2(2, 1)`
+--- print(v.zx)   -- prints `vector2(3, 1)`
+--- print(v.xyx)  -- prints `vector3(1, 2, 1)`
+--- print(v.yxyx) -- prints `vector4(2, 1, 2, 1)`
+--- print(v.zxxy) -- prints `vector4(3, 1, 1, 2)`
+--- ```
+--- Since many native functions already return and support vectors in Lua, you can do the following to push your vehicle forward 5 meters relative to its own axis:
+--- ```lua
+--- ;-- Get your vehicle's current matrix.
+--- local vehicle = GetVehiclePedIsIn(PlayerPedId())
+--- local _, forwardVector, _, position = GetEntityMatrix(vehicle)
+---
+--- ;-- Multiply the vector by 5, and add it to the current position.
+--- ;-- Since directional vectors should usually have a length of 1, this works great.
+--- local newPosition = (forwardVector * 5) + position
+---
+--- ;-- Update the vehicle position.
+--- SetEntityCoords(vehicle, newPosition)
+--- ```
+---@param x number A floating point number representing the `x` value of your vector.
+---@param y number A floating point number representing the `y` value of your vector.
+---@param z number A floating point number representing the `z` value of your vector.
+---@return vector3
+function vector3(x, y, z) end
+vec3 = vector3
+
+---
+--- ## **`CFX`**
+--- ### [Vector Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/vector3/)
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are. 
+--- This means that ´type(vector4(1, 2, 3, 4))` will return `vector4`. 
+--- ##### More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+---@class vector4
+---@field x number To get the individual values from a vector4
+---@field y number To get the individual values from a vector4
+---@field z number To get the individual values from a vector4
+---@field w number To get the individual values from a vector4
+---@field xx vector2 Vectors support arbitrary swizzling
+---@field xy vector2 Vectors support arbitrary swizzling
+---@field xz vector2 Vectors support arbitrary swizzling
+---@field xw vector2 Vectors support arbitrary swizzling
+---@field yx vector2 Vectors support arbitrary swizzling
+---@field yy vector2 Vectors support arbitrary swizzling
+---@field yz vector2 Vectors support arbitrary swizzling
+---@field yw vector2 Vectors support arbitrary swizzling
+---@field zx vector2 Vectors support arbitrary swizzling
+---@field zy vector2 Vectors support arbitrary swizzling
+---@field zz vector2 Vectors support arbitrary swizzling
+---@field zw vector2 Vectors support arbitrary swizzling
+---@field wx vector2 Vectors support arbitrary swizzling
+---@field wy vector2 Vectors support arbitrary swizzling
+---@field wz vector2 Vectors support arbitrary swizzling
+---@field ww vector2 Vectors support arbitrary swizzling
+---@field xxx vector3 Vectors support arbitrary swizzling
+---@field xxy vector3 Vectors support arbitrary swizzling
+---@field xxz vector3 Vectors support arbitrary swizzling
+---@field xxw vector3 Vectors support arbitrary swizzling
+---@field xyx vector3 Vectors support arbitrary swizzling
+---@field xyy vector3 Vectors support arbitrary swizzling
+---@field xyz vector3 Vectors support arbitrary swizzling
+---@field xyw vector3 Vectors support arbitrary swizzling
+---@field xzx vector3 Vectors support arbitrary swizzling
+---@field xzy vector3 Vectors support arbitrary swizzling
+---@field xzz vector3 Vectors support arbitrary swizzling
+---@field xzw vector3 Vectors support arbitrary swizzling
+---@field xwx vector3 Vectors support arbitrary swizzling
+---@field xwy vector3 Vectors support arbitrary swizzling
+---@field xwz vector3 Vectors support arbitrary swizzling
+---@field xww vector3 Vectors support arbitrary swizzling
+---@field yxx vector3 Vectors support arbitrary swizzling
+---@field yxy vector3 Vectors support arbitrary swizzling
+---@field yxz vector3 Vectors support arbitrary swizzling
+---@field yxw vector3 Vectors support arbitrary swizzling
+---@field yyx vector3 Vectors support arbitrary swizzling
+---@field yyy vector3 Vectors support arbitrary swizzling
+---@field yyz vector3 Vectors support arbitrary swizzling
+---@field yyw vector3 Vectors support arbitrary swizzling
+---@field yzx vector3 Vectors support arbitrary swizzling
+---@field yzy vector3 Vectors support arbitrary swizzling
+---@field yzz vector3 Vectors support arbitrary swizzling
+---@field yzw vector3 Vectors support arbitrary swizzling
+---@field ywx vector3 Vectors support arbitrary swizzling
+---@field ywy vector3 Vectors support arbitrary swizzling
+---@field ywz vector3 Vectors support arbitrary swizzling
+---@field yww vector3 Vectors support arbitrary swizzling
+---@field zxx vector3 Vectors support arbitrary swizzling
+---@field zxy vector3 Vectors support arbitrary swizzling
+---@field zxz vector3 Vectors support arbitrary swizzling
+---@field zxw vector3 Vectors support arbitrary swizzling
+---@field zyx vector3 Vectors support arbitrary swizzling
+---@field zyy vector3 Vectors support arbitrary swizzling
+---@field zyz vector3 Vectors support arbitrary swizzling
+---@field zyw vector3 Vectors support arbitrary swizzling
+---@field zzx vector3 Vectors support arbitrary swizzling
+---@field zzy vector3 Vectors support arbitrary swizzling
+---@field zzz vector3 Vectors support arbitrary swizzling
+---@field zzw vector3 Vectors support arbitrary swizzling
+---@field zwx vector3 Vectors support arbitrary swizzling
+---@field zwy vector3 Vectors support arbitrary swizzling
+---@field zwz vector3 Vectors support arbitrary swizzling
+---@field zww vector3 Vectors support arbitrary swizzling
+---@field wxx vector3 Vectors support arbitrary swizzling
+---@field wxy vector3 Vectors support arbitrary swizzling
+---@field wxz vector3 Vectors support arbitrary swizzling
+---@field wxw vector3 Vectors support arbitrary swizzling
+---@field wyx vector3 Vectors support arbitrary swizzling
+---@field wyy vector3 Vectors support arbitrary swizzling
+---@field wyz vector3 Vectors support arbitrary swizzling
+---@field wyw vector3 Vectors support arbitrary swizzling
+---@field wzx vector3 Vectors support arbitrary swizzling
+---@field wzy vector3 Vectors support arbitrary swizzling
+---@field wzz vector3 Vectors support arbitrary swizzling
+---@field wzw vector3 Vectors support arbitrary swizzling
+---@field wwx vector3 Vectors support arbitrary swizzling
+---@field wwy vector3 Vectors support arbitrary swizzling
+---@field wwz vector3 Vectors support arbitrary swizzling
+---@field www vector3 Vectors support arbitrary swizzling
+---@field xxxx vector4 Vectors support arbitrary swizzling
+---@field xxxy vector4 Vectors support arbitrary swizzling
+---@field xxxz vector4 Vectors support arbitrary swizzling
+---@field xxxw vector4 Vectors support arbitrary swizzling
+---@field xxyx vector4 Vectors support arbitrary swizzling
+---@field xxyy vector4 Vectors support arbitrary swizzling
+---@field xxyz vector4 Vectors support arbitrary swizzling
+---@field xxyw vector4 Vectors support arbitrary swizzling
+---@field xxzx vector4 Vectors support arbitrary swizzling
+---@field xxzy vector4 Vectors support arbitrary swizzling
+---@field xxzz vector4 Vectors support arbitrary swizzling
+---@field xxzw vector4 Vectors support arbitrary swizzling
+---@field xxwx vector4 Vectors support arbitrary swizzling
+---@field xxwy vector4 Vectors support arbitrary swizzling
+---@field xxwz vector4 Vectors support arbitrary swizzling
+---@field xxww vector4 Vectors support arbitrary swizzling
+---@field xyxx vector4 Vectors support arbitrary swizzling
+---@field xyxy vector4 Vectors support arbitrary swizzling
+---@field xyxz vector4 Vectors support arbitrary swizzling
+---@field xyxw vector4 Vectors support arbitrary swizzling
+---@field xyyx vector4 Vectors support arbitrary swizzling
+---@field xyyy vector4 Vectors support arbitrary swizzling
+---@field xyyz vector4 Vectors support arbitrary swizzling
+---@field xyyw vector4 Vectors support arbitrary swizzling
+---@field xyzx vector4 Vectors support arbitrary swizzling
+---@field xyzy vector4 Vectors support arbitrary swizzling
+---@field xyzz vector4 Vectors support arbitrary swizzling
+---@field xyzw vector4 Vectors support arbitrary swizzling
+---@field xywx vector4 Vectors support arbitrary swizzling
+---@field xywy vector4 Vectors support arbitrary swizzling
+---@field xywz vector4 Vectors support arbitrary swizzling
+---@field xyww vector4 Vectors support arbitrary swizzling
+---@field xzxx vector4 Vectors support arbitrary swizzling
+---@field xzxy vector4 Vectors support arbitrary swizzling
+---@field xzxz vector4 Vectors support arbitrary swizzling
+---@field xzxw vector4 Vectors support arbitrary swizzling
+---@field xzyx vector4 Vectors support arbitrary swizzling
+---@field xzyy vector4 Vectors support arbitrary swizzling
+---@field xzyz vector4 Vectors support arbitrary swizzling
+---@field xzyw vector4 Vectors support arbitrary swizzling
+---@field xzzx vector4 Vectors support arbitrary swizzling
+---@field xzzy vector4 Vectors support arbitrary swizzling
+---@field xzzz vector4 Vectors support arbitrary swizzling
+---@field xzzw vector4 Vectors support arbitrary swizzling
+---@field xzwx vector4 Vectors support arbitrary swizzling
+---@field xzwy vector4 Vectors support arbitrary swizzling
+---@field xzwz vector4 Vectors support arbitrary swizzling
+---@field xzww vector4 Vectors support arbitrary swizzling
+---@field xwxx vector4 Vectors support arbitrary swizzling
+---@field xwxy vector4 Vectors support arbitrary swizzling
+---@field xwxz vector4 Vectors support arbitrary swizzling
+---@field xwxw vector4 Vectors support arbitrary swizzling
+---@field xwyx vector4 Vectors support arbitrary swizzling
+---@field xwyy vector4 Vectors support arbitrary swizzling
+---@field xwyz vector4 Vectors support arbitrary swizzling
+---@field xwyw vector4 Vectors support arbitrary swizzling
+---@field xwzx vector4 Vectors support arbitrary swizzling
+---@field xwzy vector4 Vectors support arbitrary swizzling
+---@field xwzz vector4 Vectors support arbitrary swizzling
+---@field xwzw vector4 Vectors support arbitrary swizzling
+---@field xwwx vector4 Vectors support arbitrary swizzling
+---@field xwwy vector4 Vectors support arbitrary swizzling
+---@field xwwz vector4 Vectors support arbitrary swizzling
+---@field xwww vector4 Vectors support arbitrary swizzling
+---@field yxxx vector4 Vectors support arbitrary swizzling
+---@field yxxy vector4 Vectors support arbitrary swizzling
+---@field yxxz vector4 Vectors support arbitrary swizzling
+---@field yxxw vector4 Vectors support arbitrary swizzling
+---@field yxyx vector4 Vectors support arbitrary swizzling
+---@field yxyy vector4 Vectors support arbitrary swizzling
+---@field yxyz vector4 Vectors support arbitrary swizzling
+---@field yxyw vector4 Vectors support arbitrary swizzling
+---@field yxzx vector4 Vectors support arbitrary swizzling
+---@field yxzy vector4 Vectors support arbitrary swizzling
+---@field yxzz vector4 Vectors support arbitrary swizzling
+---@field yxzw vector4 Vectors support arbitrary swizzling
+---@field yxwx vector4 Vectors support arbitrary swizzling
+---@field yxwy vector4 Vectors support arbitrary swizzling
+---@field yxwz vector4 Vectors support arbitrary swizzling
+---@field yxww vector4 Vectors support arbitrary swizzling
+---@field yyxx vector4 Vectors support arbitrary swizzling
+---@field yyxy vector4 Vectors support arbitrary swizzling
+---@field yyxz vector4 Vectors support arbitrary swizzling
+---@field yyxw vector4 Vectors support arbitrary swizzling
+---@field yyyx vector4 Vectors support arbitrary swizzling
+---@field yyyy vector4 Vectors support arbitrary swizzling
+---@field yyyz vector4 Vectors support arbitrary swizzling
+---@field yyyw vector4 Vectors support arbitrary swizzling
+---@field yyzx vector4 Vectors support arbitrary swizzling
+---@field yyzy vector4 Vectors support arbitrary swizzling
+---@field yyzz vector4 Vectors support arbitrary swizzling
+---@field yyzw vector4 Vectors support arbitrary swizzling
+---@field yywx vector4 Vectors support arbitrary swizzling
+---@field yywy vector4 Vectors support arbitrary swizzling
+---@field yywz vector4 Vectors support arbitrary swizzling
+---@field yyww vector4 Vectors support arbitrary swizzling
+---@field yzxx vector4 Vectors support arbitrary swizzling
+---@field yzxy vector4 Vectors support arbitrary swizzling
+---@field yzxz vector4 Vectors support arbitrary swizzling
+---@field yzxw vector4 Vectors support arbitrary swizzling
+---@field yzyx vector4 Vectors support arbitrary swizzling
+---@field yzyy vector4 Vectors support arbitrary swizzling
+---@field yzyz vector4 Vectors support arbitrary swizzling
+---@field yzyw vector4 Vectors support arbitrary swizzling
+---@field yzzx vector4 Vectors support arbitrary swizzling
+---@field yzzy vector4 Vectors support arbitrary swizzling
+---@field yzzz vector4 Vectors support arbitrary swizzling
+---@field yzzw vector4 Vectors support arbitrary swizzling
+---@field yzwx vector4 Vectors support arbitrary swizzling
+---@field yzwy vector4 Vectors support arbitrary swizzling
+---@field yzwz vector4 Vectors support arbitrary swizzling
+---@field yzww vector4 Vectors support arbitrary swizzling
+---@field ywxx vector4 Vectors support arbitrary swizzling
+---@field ywxy vector4 Vectors support arbitrary swizzling
+---@field ywxz vector4 Vectors support arbitrary swizzling
+---@field ywxw vector4 Vectors support arbitrary swizzling
+---@field ywyx vector4 Vectors support arbitrary swizzling
+---@field ywyy vector4 Vectors support arbitrary swizzling
+---@field ywyz vector4 Vectors support arbitrary swizzling
+---@field ywyw vector4 Vectors support arbitrary swizzling
+---@field ywzx vector4 Vectors support arbitrary swizzling
+---@field ywzy vector4 Vectors support arbitrary swizzling
+---@field ywzz vector4 Vectors support arbitrary swizzling
+---@field ywzw vector4 Vectors support arbitrary swizzling
+---@field ywwx vector4 Vectors support arbitrary swizzling
+---@field ywwy vector4 Vectors support arbitrary swizzling
+---@field ywwz vector4 Vectors support arbitrary swizzling
+---@field ywww vector4 Vectors support arbitrary swizzling
+---@field zxxx vector4 Vectors support arbitrary swizzling
+---@field zxxy vector4 Vectors support arbitrary swizzling
+---@field zxxz vector4 Vectors support arbitrary swizzling
+---@field zxxw vector4 Vectors support arbitrary swizzling
+---@field zxyx vector4 Vectors support arbitrary swizzling
+---@field zxyy vector4 Vectors support arbitrary swizzling
+---@field zxyz vector4 Vectors support arbitrary swizzling
+---@field zxyw vector4 Vectors support arbitrary swizzling
+---@field zxzx vector4 Vectors support arbitrary swizzling
+---@field zxzy vector4 Vectors support arbitrary swizzling
+---@field zxzz vector4 Vectors support arbitrary swizzling
+---@field zxzw vector4 Vectors support arbitrary swizzling
+---@field zxwx vector4 Vectors support arbitrary swizzling
+---@field zxwy vector4 Vectors support arbitrary swizzling
+---@field zxwz vector4 Vectors support arbitrary swizzling
+---@field zxww vector4 Vectors support arbitrary swizzling
+---@field zyxx vector4 Vectors support arbitrary swizzling
+---@field zyxy vector4 Vectors support arbitrary swizzling
+---@field zyxz vector4 Vectors support arbitrary swizzling
+---@field zyxw vector4 Vectors support arbitrary swizzling
+---@field zyyx vector4 Vectors support arbitrary swizzling
+---@field zyyy vector4 Vectors support arbitrary swizzling
+---@field zyyz vector4 Vectors support arbitrary swizzling
+---@field zyyw vector4 Vectors support arbitrary swizzling
+---@field zyzx vector4 Vectors support arbitrary swizzling
+---@field zyzy vector4 Vectors support arbitrary swizzling
+---@field zyzz vector4 Vectors support arbitrary swizzling
+---@field zyzw vector4 Vectors support arbitrary swizzling
+---@field zywx vector4 Vectors support arbitrary swizzling
+---@field zywy vector4 Vectors support arbitrary swizzling
+---@field zywz vector4 Vectors support arbitrary swizzling
+---@field zyww vector4 Vectors support arbitrary swizzling
+---@field zzxx vector4 Vectors support arbitrary swizzling
+---@field zzxy vector4 Vectors support arbitrary swizzling
+---@field zzxz vector4 Vectors support arbitrary swizzling
+---@field zzxw vector4 Vectors support arbitrary swizzling
+---@field zzyx vector4 Vectors support arbitrary swizzling
+---@field zzyy vector4 Vectors support arbitrary swizzling
+---@field zzyz vector4 Vectors support arbitrary swizzling
+---@field zzyw vector4 Vectors support arbitrary swizzling
+---@field zzzx vector4 Vectors support arbitrary swizzling
+---@field zzzy vector4 Vectors support arbitrary swizzling
+---@field zzzz vector4 Vectors support arbitrary swizzling
+---@field zzzw vector4 Vectors support arbitrary swizzling
+---@field zzwx vector4 Vectors support arbitrary swizzling
+---@field zzwy vector4 Vectors support arbitrary swizzling
+---@field zzwz vector4 Vectors support arbitrary swizzling
+---@field zzww vector4 Vectors support arbitrary swizzling
+---@field zwxx vector4 Vectors support arbitrary swizzling
+---@field zwxy vector4 Vectors support arbitrary swizzling
+---@field zwxz vector4 Vectors support arbitrary swizzling
+---@field zwxw vector4 Vectors support arbitrary swizzling
+---@field zwyx vector4 Vectors support arbitrary swizzling
+---@field zwyy vector4 Vectors support arbitrary swizzling
+---@field zwyz vector4 Vectors support arbitrary swizzling
+---@field zwyw vector4 Vectors support arbitrary swizzling
+---@field zwzx vector4 Vectors support arbitrary swizzling
+---@field zwzy vector4 Vectors support arbitrary swizzling
+---@field zwzz vector4 Vectors support arbitrary swizzling
+---@field zwzw vector4 Vectors support arbitrary swizzling
+---@field zwwx vector4 Vectors support arbitrary swizzling
+---@field zwwy vector4 Vectors support arbitrary swizzling
+---@field zwwz vector4 Vectors support arbitrary swizzling
+---@field zwww vector4 Vectors support arbitrary swizzling
+---@field wxxx vector4 Vectors support arbitrary swizzling
+---@field wxxy vector4 Vectors support arbitrary swizzling
+---@field wxxz vector4 Vectors support arbitrary swizzling
+---@field wxxw vector4 Vectors support arbitrary swizzling
+---@field wxyx vector4 Vectors support arbitrary swizzling
+---@field wxyy vector4 Vectors support arbitrary swizzling
+---@field wxyz vector4 Vectors support arbitrary swizzling
+---@field wxyw vector4 Vectors support arbitrary swizzling
+---@field wxzx vector4 Vectors support arbitrary swizzling
+---@field wxzy vector4 Vectors support arbitrary swizzling
+---@field wxzz vector4 Vectors support arbitrary swizzling
+---@field wxzw vector4 Vectors support arbitrary swizzling
+---@field wxwx vector4 Vectors support arbitrary swizzling
+---@field wxwy vector4 Vectors support arbitrary swizzling
+---@field wxwz vector4 Vectors support arbitrary swizzling
+---@field wxww vector4 Vectors support arbitrary swizzling
+---@field wyxx vector4 Vectors support arbitrary swizzling
+---@field wyxy vector4 Vectors support arbitrary swizzling
+---@field wyxz vector4 Vectors support arbitrary swizzling
+---@field wyxw vector4 Vectors support arbitrary swizzling
+---@field wyyx vector4 Vectors support arbitrary swizzling
+---@field wyyy vector4 Vectors support arbitrary swizzling
+---@field wyyz vector4 Vectors support arbitrary swizzling
+---@field wyyw vector4 Vectors support arbitrary swizzling
+---@field wyzx vector4 Vectors support arbitrary swizzling
+---@field wyzy vector4 Vectors support arbitrary swizzling
+---@field wyzz vector4 Vectors support arbitrary swizzling
+---@field wyzw vector4 Vectors support arbitrary swizzling
+---@field wywx vector4 Vectors support arbitrary swizzling
+---@field wywy vector4 Vectors support arbitrary swizzling
+---@field wywz vector4 Vectors support arbitrary swizzling
+---@field wyww vector4 Vectors support arbitrary swizzling
+---@field wzxx vector4 Vectors support arbitrary swizzling
+---@field wzxy vector4 Vectors support arbitrary swizzling
+---@field wzxz vector4 Vectors support arbitrary swizzling
+---@field wzxw vector4 Vectors support arbitrary swizzling
+---@field wzyx vector4 Vectors support arbitrary swizzling
+---@field wzyy vector4 Vectors support arbitrary swizzling
+---@field wzyz vector4 Vectors support arbitrary swizzling
+---@field wzyw vector4 Vectors support arbitrary swizzling
+---@field wzzx vector4 Vectors support arbitrary swizzling
+---@field wzzy vector4 Vectors support arbitrary swizzling
+---@field wzzz vector4 Vectors support arbitrary swizzling
+---@field wzzw vector4 Vectors support arbitrary swizzling
+---@field wzwx vector4 Vectors support arbitrary swizzling
+---@field wzwy vector4 Vectors support arbitrary swizzling
+---@field wzwz vector4 Vectors support arbitrary swizzling
+---@field wzww vector4 Vectors support arbitrary swizzling
+---@field wwxx vector4 Vectors support arbitrary swizzling
+---@field wwxy vector4 Vectors support arbitrary swizzling
+---@field wwxz vector4 Vectors support arbitrary swizzling
+---@field wwxw vector4 Vectors support arbitrary swizzling
+---@field wwyx vector4 Vectors support arbitrary swizzling
+---@field wwyy vector4 Vectors support arbitrary swizzling
+---@field wwyz vector4 Vectors support arbitrary swizzling
+---@field wwyw vector4 Vectors support arbitrary swizzling
+---@field wwzx vector4 Vectors support arbitrary swizzling
+---@field wwzy vector4 Vectors support arbitrary swizzling
+---@field wwzz vector4 Vectors support arbitrary swizzling
+---@field wwzw vector4 Vectors support arbitrary swizzling
+---@field wwwx vector4 Vectors support arbitrary swizzling
+---@field wwwy vector4 Vectors support arbitrary swizzling
+---@field wwwz vector4 Vectors support arbitrary swizzling
+---@field wwww vector4 Vectors support arbitrary swizzling
+
+---
+--- ## **`CFX`**
+--- ### [Vector Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/vector4/)
+--- #### Creates a new vector4 value.
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are.
+--- This means that ´type(vector4(1, 2, 3, 4))` will return `vector4`.
+--- ##### More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+--- ### **Syntax**
+--- ```lua
+--- vector4(x: number, y: number, z: number, w: number): vector4
+--- ```
+--- #### **Required arguments**
+--- `x` - A floating point number representing the `x` value of your vector.
+--- `y` - A floating point number representing the `y` value of your vector.
+--- `z` - A floating point number representing the `z` value of your vector.
+--- `w` - A floating point number representing the `w` value of your vector.
+--- ### **Examples**
+--- ```lua
+--- ;-- Basic vector with zero length:
+--- vector4(0, 0, 0, 0)
+---
+--- ;-- Vectors are a real data type:
+--- local v = vector4(1, 2, 3, 4)
+--- print(type(v)) -- prints `vector4`
+---
+--- ;-- Vectors support equality operators:
+--- local v1 = vector4(1, 2, 3, 4)
+--- local v2 = vector4(1, 2, 3, 4)
+--- local v3 = vector4(5, 6, 7, 8)
+--- print(v1 == v2) -- prints `true`
+--- print(v1 == v3) -- prints `false`
+--- print(v1 ~= v3) -- prints `true`
+---
+--- ;-- Arithmetic operations between vectors are supported:
+--- local v = vector4(1, 2, 3, 4)
+--- print(v + 2) -- prints `vector4(3, 4, 5, 6)`
+--- print(v - 2) -- prints `vector4(-1, 0, 1, 2)`
+--- print(v * 2) -- prints `vector4(1, 4, 6, 8)`
+--- print(v / 2) -- prints `vector4(0.5, 1, 1.5, 2)`
+---
+--- ;-- Or even with another vector:
+--- local v1 = vector4(1, 2, 3, 4)
+--- local v2 = vector4(5, 6, 7, 8)
+--- print(v1 + v2) -- prints `vector4(6, 8, 9, 12)`
+--- print(v1 - v2) -- prints `vector4(-4, -4, -4)`
+--- print(v1 * v2) -- prints `vector4(5, 12, 21, 32)`
+--- print(v1 / v2) -- prints `vector4(0.2, 0.33, 0.43, 0.5)`
+---
+--- ;-- Vectors can be inverted:
+--- local v = vector4(1, 2, 3, 4)
+--- print(-v) ;-- prints `vector4(-1, -2, -3, -4)`
+---
+--- ;-- The length of the vector can be retrieved (pythagoras):
+--- local v = vector4(1, 2, 3, 4)
+--- print(#v) -- prints `5.477`
+---
+--- ;-- Vectors can be normalized:
+--- local v = vector4(1, 2, 3, 4)
+--- print(norm(v)) -- prints `vector4(0.1825742, 0.3651484, 0.5477225, 0.7302967)`
+---
+--- ;-- Unpacking works:
+--- local v = vector4(1, 2, 3, 4)
+--- local x, y, z, w = table.unpack(v)
+---
+--- ;-- To get the individual values from a vector:
+--- local v = vector4(1, 2, 3, 4)
+--- print(v.x) -- prints `1`
+--- print(v.y) -- prints `2`
+--- print(v.z) -- prints `3`
+--- print(v.w) -- prints `4`
+---
+--- ;-- Vectors support arbitrary swizzling:
+--- local v = vector4(1, 2, 3, 4)
+--- print(v.yx)   -- prints `vector2(2, 1)`
+--- print(v.wz)   -- prints `vector2(4, 3)`
+--- print(v.xyx)  -- prints `vector3(1, 2, 1)`
+--- print(v.ywz)  -- prints `vector3(2, 4, 3)`
+--- print(v.yxyx) -- prints `vector4(2, 1, 2, 1)`
+--- print(v.zxwy) -- prints `vector4(3, 1, 4, 2)`
+--- ```
+---@param x number A floating point number representing the `x` value of your vector.
+---@param y number A floating point number representing the `y` value of your vector.
+---@param z number A floating point number representing the `z` value of your vector.
+---@param w number A floating point number representing the `w` value of your vector.
+---@return vector4
+function vector4(x, y, z, w) end
+vec4 = vector4
+
+---
+--- ## **`CFX`**
+--- ### [Vector Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/vec/)
+--- #### Creates a new vector depending on the count of arguments.
+--- ### **Syntax**
+--- Supports 1 to 4 arguments. Return value is depends on the input.
+--- ```lua
+--- number  vec(float x)
+--- vector2 vec(float x, float y)
+--- vector3 vec(float x, float y, float z)
+--- vector4 vec(float x, float y, float z, float w)
+--- ```
+--- #### **Required arguments**
+--- `x` - A floating point number representing the `x` value of your vector.
+--- #### **Optional arguments**
+--- `y` - A floating point number representing the `y` value of your vector.
+--- `z` - A floating point number representing the `z` value of your vector.
+--- `w` - A floating point number representing the `w` value of your vector.
+--- ### **Returns**
+--- * If 1 argument is passed, returns the `number`.
+--- * If 2 arguments is passed, returns the `vector2`.
+--- * If 3 arguments is passed, returns the `vector3`.
+--- * If 4 arguments is passed, returns the `vector4`.
+--- ### **Examples**
+--- ```lua
+--- local v1 = vec(1) -- returns `number`
+--- local v2 = vec(1, 2) -- returns `vector2`
+--- local v3 = vec(1, 2, 3) -- returns `vector3`
+--- local v4 = vec(1, 2, 3, 4) -- returns `vector4`
+--- ```
+--- A basic version of this function could be implemented like so:
+--- ```lua
+--- ;function vec_alt(...)
+--- ;  local args = {...}
+--- ;  if #args == 1 then
+--- ;    return args[1]
+--- ;  elseif #args == 2 then
+--- ;    return vector2(args[1], args[2])
+--- ;  elseif #args == 3 then
+--- ;    return vector3(args[1], args[2], args[3])
+--- ;  elseif #args == 4 then
+--- ;    return vector4(args[1], args[2], args[3], args[4])
+--- ;  else
+--- ;    error('Argument count mismatch.')
+--- ;  end
+--- ;end
+--- ```
+---@overload fun(x:number):number
+---@overload fun(x:number, y:number):vector2
+---@overload fun(x:number, y:number, z:number):vector3
+---@overload fun(x:number, y:number, z:number, w:number):vector4
+---@param x number A floating point number representing the `x` value of your vector.
+---@param y number Optional - A floating point number representing the `y` value of your vector.
+---@param z number Optional - A floating point number representing the `z` value of your vector.
+---@param w number Optional - A floating point number representing the `w` value of your vector.
+---@return number|vector2|vector3|vector4
+function vec(x, y, z, w) end
+vector = vec
+
+---
+--- ## **`CFX`**
+--- ### [Quaternion Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/quat/)
+--- Quaternions are incredibly useful to represent and calculate rotations in 3D world space. Unlike the more common [euler angles](https://en.wikipedia.org/wiki/Euler_angles),
+--- #### [quaternions](https://en.wikipedia.org/wiki/Quaternion) are immune to [gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock) and are therefor much more suitable for transforming rotations.
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are. 
+--- This means that type(quat(1, 0, 0, 0))` will return `quat`. 
+--- More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+--- If you're looking for a good way to visualize quaternions, try https://quaternions.online.
+---@class quat
+---@field x number To get the individual quaternion values
+---@field y number To get the individual quaternion values
+---@field z number To get the individual quaternion values
+---@field w number To get the individual quaternion values
+
+---
+--- ## **`CFX`**
+--- ### [Quaternion Documentation](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/quat/)
+--- #### Creates a new quaternion value.
+--- Quaternions are incredibly useful to represent and calculate rotations in 3D world space. Unlike the more common [euler angles](https://en.wikipedia.org/wiki/Euler_angles),
+--- [quaternions](https://en.wikipedia.org/wiki/Quaternion) are immune to [gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock) and are therefor much more suitable for transforming rotations.
+--- In FiveM's Lua runtime, vectors are real data types, just like numbers, bools and strings are.
+--- This means that type(quat(1, 0, 0, 0))` will return `quat`.
+--- More about this in the [Lua runtime manual](https://docs.fivem.net/docs/scripting-manual/runtimes/lua/).
+--- If you're looking for a good way to visualize quaternions, try https://quaternions.online.
+--- ### **Syntax 1**
+--- The basic syntax is to create a quaternion in its raw form.
+--- ```lua
+--- quat(w: number, x: number, y: number, z: number): quat
+--- ```
+--- #### **Required arguments**
+--- `w` - A floating point number representing the `w` value of your quaternion.
+--- `x` - A floating point number representing the `x` value of your quaternion.
+--- `y` - A floating point number representing the `y` value of your quaternion.
+--- `z` - A floating point number representing the `z` value of your quaternion.
+--- ### **Syntax 2**
+--- It's also possible to create a quaternion based on an angle/axis using a vector.
+--- ```lua
+--- quat(float w, vector3 vec): quat
+--- ```
+--- #### **Required arguments**
+--- `w` - The angle of the rotation.
+--- `vec` - A vector3 representing the axis to rotate around.
+--- ### **Syntax 3**
+--- Alternatively, it's possible to create a quaternion calculated between 2 vector3 values. This would represent the rotation between the vectors.
+--- ```lua
+--- quat(vector3 vec1, vector3 vec2): quat
+--- ```
+--- #### **Required arguments**
+--- `vec1` - A vector3 representing the starting point.
+--- `vec2` - A vector3 representing the ending point.
+--- ### **Examples**
+--- Basic quaternion functionality:
+--- ```lua
+--- ;-- Create a basic quaternion:
+--- quat(1, 0, 0, 0)
+---
+--- ;-- Basic rotations:
+--- quat(1, 1, 0, 0) -- 180 degrees about X
+--- quat(1, 0, 1, 0) -- 180 degrees about Y
+--- quat(1, 0, 0, 1) -- 180 degrees about Z
+---
+--- ;-- Create a quaternion rotated around an axis:
+--- quat(90, vector3(1, 0, 0)) -- 90 degrees clockwise around the X axis
+--- quat(90, vector3(0, 1, 0)) -- 90 degrees clockwise around the Y axis
+--- quat(90, vector3(0, 0, 1)) -- 90 degrees clockwise around the Z axis
+---
+--- ;-- It's also possible to create the above counter-clockwise.
+--- ;-- Both of the below rotates counter-clockwise around the X axis:
+--- quat(-90, vec(1, 0, 0))
+--- quat(90, vec(-1, 0, 0))
+---
+--- ;-- You can also calculate the rotation between 2 vectors.
+--- ;-- Both of the following rotate 90 degrees arount the X axis:
+--- quat(vec(0, 1, 0), vec(0, 0, 1))  --  Y is turned to Z
+--- quat(vec(0, 0, -1), vec(0, 1, 0)) -- -Z is turned to X
+---
+--- ;-- You can get the individual quaternion values like so:
+--- local q = quat(1, 0, 0, 0)
+--- print(q.w) -- prints the `w` value
+--- print(q.x) -- prints the `x` value
+--- print(q.y) -- prints the `y` value
+--- print(q.z) -- prints the `z` value
+---
+--- ;-- Unpacking works too:
+--- local q = quat(1, 0, 0, 0)
+--- local w, x, y, z = table.unpack(q)
+---
+--- ;-- To get the rotation and axis:
+--- local q = quat(90, vector3(1, 0, 0))
+--- print(q.axis)  -- prints `vector3(1, 0, 0)`
+--- print(q.angle) -- prints `90`
+---
+--- ;-- The length of a quaternion is usually 1.0:
+--- local q = quat(1, 0, 0, 0)
+--- print(#q)
+---
+--- ;-- Quaternions are real data types:
+--- local q = quat(1, 0, 0, 0)
+--- print(type(q)) -- prints `quat`
+---
+--- ;-- Comparing quaternions:
+--- local q1 = quat(90, vector3(1, 0, 0))
+--- local q2 = quat(90, vector3(1, 0, 0))
+--- local q2 = quat(45, vector3(1, 0, 0))
+--- print(q1 == q2) -- prints `true`
+--- print(q1 == q3) -- prints `false`
+--- print(q1 ~= q3) -- prints `true`
+---
+--- ;-- Basic calculations are supported.
+--- ;-- The following rotates an existing quaternion 45 degrees around its X axis:
+--- local q1 = quat(1, 0, 0, 0)
+--- local q2 = q1 * quat(45, vector3(1, 0, 0))
+---
+--- ;-- To invert a quaternion, use `inv`:
+--- local q1 = quat(35, vec(0, 1, 0))
+--- local q2 = quat(-35, vec(0, 1, 0))
+--- print(inv(q1) == q2) -- prints `true`
+--- ```
+--- Create a quaternion based on your current vehicle's rotation:
+--- ```lua
+--- local vehicle = GetVehiclePedIsIn(PlayerPedId())
+---
+--- ;-- GTA returns the `w` value last.
+--- local x, y, z, w = GetEntityQuaternion(vehicle)
+--- local q = quat(w, x, y, z)
+---
+--- ;-- Prints the quaternion to your client console
+--- print(q)
+--- ```
+---@overload fun(w:number, vec:vector3):quat
+---@overload fun(vec1:vector3, vec2:vector3):quat
+---@param w number The angle of the rotation.
+---@param x number A floating point number representing the `x` value of your quaternion.
+---@param y number A floating point number representing the `y` value of your quaternion.
+---@param z number A floating point number representing the `z` value of your quaternion.
+---@param vec vector3 representing the axis to rotate around.
+---@param vec1 vector3 representing the starting point.
+---@param vec2 vector3 representing the ending point.
+---@return quat
+function quat(w, x, y, z) end
+
+---@alias vector vector2 | vector3 | vector4
+---@class matrix<Tbl>: { [number]: Tbl }
+
+---@overload fun(x, y): matrix<vector2>
+---@overload fun(x, y, z): matrix<vector3>
+---@overload fun(x, y, z, w): matrix<vector4>
+---@generic Vector: vector
+---@param x Vector
+---@param y Vector
+---@param z Vector
+---@param w Vector
+---@return matrix<Vector>
+function mat(x, y, z, w) end
+
+---@vararg number
+---@return matrix<vector2>
+function mat2(...) end
+
+mat2x2 = mat2
+mat3x2 = mat2
+mat4x2 = mat2
+
+---@vararg number
+---@return matrix<vector3>
+function mat3(...) end
+
+mat2x3 = mat3
+mat3x3 = mat3
+mat4x3 = mat3
+
+---@vararg number
+---@return matrix<vector4>
+function mat4(...) end
+
+mat2x4 = mat4
+mat3x4 = mat4
+mat4x4 = mat4
+
+--- Returns the dot product of x and y.
+---@overload fun(x: vector2, y: vector2): number
+---@overload fun(x: vector3, y: vector3): number
+---@overload fun(x: vector4, y: vector4): number
+---@overload fun(x: quat, y: quat): number
+---@param x number
+---@param y number
+---@return number
+function dot(x, y) end
+
+--- Returns the cross product of x and y.
+---@overload fun(x: vector3, y: vector3): vector3
+---@overload fun(x: quat, y: quat): quat
+---@overload fun(x: vector3, y: quat): vector3
+---@overload fun(x: quat, y: vector3): vector3
+---@param x vector2
+---@param y vector2
+---@return number
+function cross(x, y) end
+
+--- Returns the quaternion inverse, or inverse of a squared matrix.
+---@generic Tbl: matrix|quat
+---@param value Tbl
+---@return Tbl
+function inverse(value) end
+
+--- Returns a vector in the same direction as x but with length of 1.
+---@generic Tbl: vector|quat
+---@param value Tbl
+---@return Tbl
+function norm(value) end
+
+--- Returns spherical interpolation between two vectors.
+---@overload fun(x: quat, y: quat, t: number): quat
+---@param x vector
+---@param y vector
+---@param t number
+---@return vector
+function slerp(x, y, t) end
+
+---When assigned to a to-be-closed variable it will call the function once the variable falls out of scope.
+---@nodiscard
+---@param fn function
+function defer(fn) end
+
+each = pairs
