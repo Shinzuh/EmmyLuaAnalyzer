@@ -36,6 +36,7 @@ public enum LuaTokenKind : ushort
     TkDiv, // /
     TkIDiv, // //
     TkDot, // .
+    TkOptionalChaining, // ?.
     TkConcat, // ..
     TkDots, // ...
     TkComma, // ,

@@ -329,7 +329,7 @@ public class LuaDocLexer(LuaDocument document)
                 Reader.EatWhen(char.IsDigit);
                 return LuaTokenKind.TkInt;
             }
-            case var del and ('"' or '\''):
+            case var del and ('"' or '\'' or '`'):
             {
                 Reader.Bump();
                 Reader.EatWhen(ch => ch != del);
@@ -340,17 +340,17 @@ public class LuaDocLexer(LuaDocument document)
 
                 return LuaTokenKind.TkString;
             }
-            case '`':
-            {
-                Reader.Bump();
-                Reader.EatWhen(ch => ch != '`');
-                if (Reader.CurrentChar == '`')
-                {
-                    Reader.Bump();
-                }
-
-                return LuaTokenKind.TkTypeTemplate;
-            }
+            // case '`':
+            // {
+            //     Reader.Bump();
+            //     Reader.EatWhen(ch => ch != '`');
+            //     if (Reader.CurrentChar == '`')
+            //     {
+            //         Reader.Bump();
+            //     }
+            //
+            //     return LuaTokenKind.TkTypeTemplate;
+            // }
             case var ch when LuaLexer.IsNameStart(ch):
             {
                 Reader.EatWhen(c =>

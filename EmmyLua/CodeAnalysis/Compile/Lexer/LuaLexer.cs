@@ -120,6 +120,12 @@ public class LuaLexer(LuaDocument document)
             case '-':
             {
                 Reader.Bump();
+                if (Reader.CurrentChar == '=')
+                {
+                    Reader.Bump();
+                    return LuaTokenKind.TkAssign;
+                }
+
                 if (Reader.CurrentChar != '-')
                 {
                     return LuaTokenKind.TkMinus;
@@ -210,7 +216,7 @@ public class LuaLexer(LuaDocument document)
                 Reader.Bump();
                 return LuaTokenKind.TkDbColon;
             }
-            case var quote and ('"' or '\''):
+            case var quote and ('"' or '\'' or '`'):
             {
                 Reader.Bump();
                 while (!Reader.IsEof)
@@ -264,6 +270,17 @@ public class LuaLexer(LuaDocument document)
                 Reader.Bump();
                 return LuaTokenKind.TkString;
             }
+            case '?':
+            {
+                Reader.Bump();
+                if (Reader.CurrentChar == '.')
+                {
+                    Reader.Bump();
+                    return LuaTokenKind.TkDot;
+                }
+
+                return LuaTokenKind.TkUnknown;
+            }
             case '.':
             {
                 if (Reader.NextChar is >= '0' and <= '9')
@@ -296,11 +313,23 @@ public class LuaLexer(LuaDocument document)
             case '*':
             {
                 Reader.Bump();
+                if (Reader.CurrentChar == '=')
+                {
+                    Reader.Bump();
+                    return LuaTokenKind.TkAssign;
+                }
+
                 return LuaTokenKind.TkMul;
             }
             case '+':
             {
                 Reader.Bump();
+                if (Reader.CurrentChar == '=')
+                {
+                    Reader.Bump();
+                    return LuaTokenKind.TkAssign;
+                }
+
                 return LuaTokenKind.TkPlus;
             }
             case '%':

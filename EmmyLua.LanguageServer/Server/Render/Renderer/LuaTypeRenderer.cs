@@ -198,7 +198,7 @@ public static class LuaTypeRenderer
             }
             case LuaStringLiteralType stringLiteralType:
             {
-                if (stringLiteralType.Content.StartsWith('\'') || stringLiteralType.Content.StartsWith('"'))
+                if (stringLiteralType.Content.StartsWith('\'') || stringLiteralType.Content.StartsWith('"') || stringLiteralType.Content.StartsWith('`'))
                 {
                     renderContext.Append(stringLiteralType.Content);
                     break;
