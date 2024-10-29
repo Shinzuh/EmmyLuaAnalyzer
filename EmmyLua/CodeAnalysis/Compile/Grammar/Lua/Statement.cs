@@ -476,7 +476,8 @@ public static class StatementParser
             var cm = ExpressionParser.SuffixExpression(p);
             if (!cm.IsComplete)
             {
-                return m.Fail(p, LuaSyntaxKind.ExprStat, "expected expression");
+                // return m.Fail(p, LuaSyntaxKind.ExprStat, "expected expression");
+                // return m.Fail(p, LuaSyntaxKind.ExprStat, "this is a test");
             }
 
             if (p.Current is not (LuaTokenKind.TkAssign or LuaTokenKind.TkComma))

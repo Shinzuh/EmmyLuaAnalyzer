@@ -49,7 +49,7 @@ public class CompletionHandler(ServerContext context) : CompletionHandlerBase
         serverCapabilities.CompletionProvider = new CompletionOptions()
         {
             ResolveProvider = true,
-            TriggerCharacters = [".", ":", "(", "[", "\"", "\'", ",", "@", "\\", "/"],
+            TriggerCharacters = [".", ":", "(", "[", "\"", "\'", "`", ",", "@", "\\", "/"],
             CompletionItem = new()
             {
                 LabelDetailsSupport = true

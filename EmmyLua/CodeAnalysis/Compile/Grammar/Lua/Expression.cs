@@ -22,7 +22,7 @@ public static class ExpressionParser
                 p.Bump();
                 if (!SubExpression(p, OperatorKind.UNARY_PRIORITY).IsComplete)
                 {
-                    return m.Fail(p, LuaSyntaxKind.UnaryExpr, "unary operator not followed by expression");
+                    return m.Fail(p, LuaSyntaxKind.UnaryExpr, " unary operator not followed by expression");
                 }
                 cm = m.Complete(p, LuaSyntaxKind.UnaryExpr);
                 m = cm.Precede(p);
@@ -310,6 +310,7 @@ public static class ExpressionParser
                 p.Expect(LuaTokenKind.TkRightBracket);
                 break;
             }
+            case LuaTokenKind.TkOptionalChaining:
             case LuaTokenKind.TkDot:
             {
                 p.Bump();

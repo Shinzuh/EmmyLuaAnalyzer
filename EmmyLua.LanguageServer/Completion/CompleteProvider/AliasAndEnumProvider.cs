@@ -151,7 +151,7 @@ public class AliasAndEnumProvider : ICompleteProviderBase
                 if (literalType is { IsString: true, String: { Value: { } label } stringLiteral })
                 {
                     // compact emmylua old alias
-                    label = label.Trim('\'', '\"');
+                    label = label.Trim('\'', '\"', '`');
 
                     if (context.TriggerToken is not LuaStringToken)
                     {
@@ -159,6 +159,10 @@ public class AliasAndEnumProvider : ICompleteProviderBase
                         if (stringLiteral.RepresentText.StartsWith('\"'))
                         {
                             quote = "\"";
+                        }
+                        else if (stringLiteral.RepresentText.StartsWith('`'))
+                        {
+                            quote = "`";
                         }
                         
                         label = $"{quote}{label}{quote}";
@@ -191,9 +195,9 @@ public class AliasAndEnumProvider : ICompleteProviderBase
             if (luaType is LuaStringLiteralType stringLiteralType)
             {
                 var label = stringLiteralType.Content;
-                if (stringLiteralType.Content.StartsWith('\'') || stringLiteralType.Content.StartsWith('"'))
+                if (stringLiteralType.Content.StartsWith('\'') || stringLiteralType.Content.StartsWith('"') || stringLiteralType.Content.StartsWith('`'))
                 {
-                    label = stringLiteralType.Content.Trim('\'', '"');
+                    label = stringLiteralType.Content.Trim('\'', '"', '`');
                 }
 
                 if (context.TriggerToken is not LuaStringToken)
